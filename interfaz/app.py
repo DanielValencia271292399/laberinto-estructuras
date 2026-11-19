@@ -18,7 +18,7 @@ import tkinter as tk
 
 from estructuras.lista_doble import ListaDoble
 from juego.laberinto import Laberinto, PARED
-from juego.partida import Partida, VisorRecorrido, DIFICULTADES, GANO, PERDIO, JUGANDO
+from juego.partida import Partida, VisorRecorrido, DIFICULTADES, GANO, JUGANDO, VIDAS_INICIALES
 from juego.puntajes import TablaPuntajes, Registro, validar_nombre, validar_puntaje
 
 # ------------------------------------------------------------------ estilo
@@ -576,7 +576,7 @@ class AppLaberinto:
         self._texto(x + 18, 72, "Dificultad: " + NOMBRES_DIFICULTAD[p.dificultad], 13, C_SUAVE)
 
         self._texto(x + 18, 108, "Vidas", 12, C_SUAVE)
-        for i in range(3):
+        for i in range(VIDAS_INICIALES):
             color = C_ENEMIGO if i < p.vidas else "#33415c"
             self.canvas.create_oval(x + 18 + i * 30, 130, x + 42 + i * 30, 154, fill=color, outline="")
 
@@ -782,7 +782,8 @@ class AppLaberinto:
             "todos los enemigos avanzan un paso por su ruta de patrulla.",
             "Los enemigos (rojos) esperan en una cola y entran al laberinto uno por uno cada "
             "cierto número de turnos.",
-            "Si un enemigo te toca pierdes una vida y vuelves al inicio. Tienes 3 vidas.",
+            "Si un enemigo te toca pierdes una vida y vuelves al inicio. Tienes "
+            + str(VIDAS_INICIALES) + " vidas.",
             "Pierdes si te quedas sin vidas o si gastas todos los pasos permitidos.",
             "Deshacer (Z) te regresa a la casilla anterior, pero cuenta como turno y resta puntos.",
             "Pista (H) muestra el camino más corto a la salida durante unos turnos. Son limitadas.",
